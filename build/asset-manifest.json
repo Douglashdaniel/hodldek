@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f598cfbd.chunk.css",
+    "main.js": "/static/js/main.e1541bc3.chunk.js",
+    "main.js.map": "/static/js/main.e1541bc3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0befd026.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0befd026.js.map",
+    "static/js/2.abc2b245.chunk.js": "/static/js/2.abc2b245.chunk.js",
+    "static/js/2.abc2b245.chunk.js.map": "/static/js/2.abc2b245.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.e0c019ab8dbb67ced002d2eb3f8c8558.js": "/precache-manifest.e0c019ab8dbb67ced002d2eb3f8c8558.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.f598cfbd.chunk.css.map": "/static/css/main.f598cfbd.chunk.css.map",
+    "static/js/2.abc2b245.chunk.js.LICENSE.txt": "/static/js/2.abc2b245.chunk.js.LICENSE.txt",
+    "static/media/braveBrowser.gif": "/static/media/braveBrowser.bea3aa9c.gif",
+    "static/media/moon.png": "/static/media/moon.aeb3c06c.png",
+    "static/media/pumpicon.png": "/static/media/pumpicon.3de88b2a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0befd026.js",
+    "static/js/2.abc2b245.chunk.js",
+    "static/css/main.f598cfbd.chunk.css",
+    "static/js/main.e1541bc3.chunk.js"
+  ]
+}
