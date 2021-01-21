@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: hodldek.com
+Token: 81350945ae7bfad77381b4d4d1a4592febea9c858cb2863bd494b46188c3a10e
