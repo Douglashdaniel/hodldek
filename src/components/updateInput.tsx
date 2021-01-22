@@ -15,13 +15,13 @@ const UpdateInput = (props: IProps) => {
 	);
 
 	return (
-		<AmountWrapper mode={darkMode}>
+		<AmountWrapper $mode={darkMode}>
 			<AmountBarInput
 				placeholder="Enter Amount"
 				value={value}
 				onChange={action}
 				type="number"
-				mode={darkMode}
+				$mode={darkMode}
 				inputMode="decimal"
 			/>
 		</AmountWrapper>
@@ -30,18 +30,18 @@ const UpdateInput = (props: IProps) => {
 
 export default UpdateInput;
 
-const AmountWrapper = styled.div<{ mode: boolean }>`
+const AmountWrapper = styled.div<{ $mode: boolean }>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
 	width: 100%;
 	margin-bottom: 2px;
-	border-bottom: ${({ mode }) =>
-		mode ? `1px solid rgba(255, 255, 255, 0.8)` : `1px solid rgba(0,0,0,0.6)`};
+	border-bottom: ${({ $mode }) =>
+		$mode ? `1px solid rgba(255, 255, 255, 0.8)` : `1px solid rgba(0,0,0,0.6)`};
 `;
 
-const AmountBarInput = styled.input<{ mode: boolean }>`
+const AmountBarInput = styled.input<{ $mode: boolean }>`
 	width: 100%;
 	text-align: center;
 	padding: 5px;
@@ -54,7 +54,7 @@ const AmountBarInput = styled.input<{ mode: boolean }>`
 	background-image: none;
 	background-color: transparent;
 	box-shadow: none;
-	color: ${({ mode }) => (mode ? `white` : `rgba(0,0,0,0.6)`)};
+	color: ${({ $mode }) => ($mode ? `white` : `rgba(0,0,0,0.6)`)};
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	::-webkit-input-placeholder {

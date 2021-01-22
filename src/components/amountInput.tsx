@@ -15,13 +15,13 @@ const AmountInput = (props: IProps) => {
 	);
 
 	return (
-		<AmountWrapper mode={darkMode}>
+		<AmountWrapper $mode={darkMode}>
 			<AmountBarInput
 				placeholder="Enter Amount"
 				value={value}
 				onChange={action}
 				type="number"
-				mode={darkMode}
+				$mode={darkMode}
 				inputMode="decimal"
 			/>
 		</AmountWrapper>
@@ -30,7 +30,7 @@ const AmountInput = (props: IProps) => {
 
 export default AmountInput;
 
-const AmountWrapper = styled.div<{ mode: boolean }>`
+const AmountWrapper = styled.div<{ $mode: boolean }>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -40,18 +40,18 @@ const AmountWrapper = styled.div<{ mode: boolean }>`
 	// padding-right: 5px;
 	margin-left: 5px;
 	margin-right: 5px;
-	border-bottom: ${({ mode }) =>
-		mode ? `1px solid rgba(255, 255, 255, 0.8)` : `1px solid rgba(0,0,0,0.6)`};
+	border-bottom: ${({ $mode }) =>
+		$mode ? `1px solid rgba(255, 255, 255, 0.8)` : `1px solid rgba(0,0,0,0.6)`};
 `;
 
-const AmountBarInput = styled.input<{ mode: boolean }>`
+const AmountBarInput = styled.input<{ $mode: boolean }>`
 	width: 100%;
 	outline: none;
 	border: none;
 	background-image: none;
 	background-color: transparent;
 	box-shadow: none;
-	color: ${({ mode }) => (mode ? `white` : `rgba(0,0,0,0.6)`)};
+	color: ${({ $mode }) => ($mode ? `white` : `rgba(0,0,0,0.6)`)};
 	padding: 5px;
 	font-size: 14px;
 	font-family: Inter, -apple-system, BlinkMacSystemFont, 'segoe ui', Roboto,

@@ -154,7 +154,7 @@ const NewAssetContainer = styled.div<{ theme: string }>`
 	}
 	@media only screen and (min-width: 320px) and (max-width: 820px) {
 		left: 5px;
-		top: 110px;
+		top: 120px;
 		right: none;
 	}
 `;

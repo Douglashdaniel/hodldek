@@ -21,9 +21,9 @@ const SearchResults = (props: IProps) => {
 	);
 
 	return (
-		<SelectContainer mode={darkMode} key={buttonKey} onClick={action}>
+		<SelectContainer $mode={darkMode} key={buttonKey} onClick={action}>
 			<NameAndTicker>
-				<SelectText mode={darkMode} key={textKey}>
+				<SelectText $mode={darkMode} key={textKey}>
 					{name}
 				</SelectText>
 				<Ticker>{ticker.toUpperCase()}</Ticker>
@@ -39,7 +39,7 @@ const SearchResults = (props: IProps) => {
 
 export default SearchResults;
 
-const SelectContainer = styled.div<{ mode: boolean }>`
+const SelectContainer = styled.div<{ $mode: boolean }>`
 	cursor: pointer;
 	display: flex;
 	align-items: center;
@@ -47,7 +47,7 @@ const SelectContainer = styled.div<{ mode: boolean }>`
 	flex-direction: row;
 	padding: 6px;
 	margin: 2px;
-	background-color: ${({ mode }) => (mode ? `rgb(23, 24, 27)` : `white`)};
+	background-color: ${({ $mode }) => ($mode ? `rgb(23, 24, 27)` : `white`)};
 `;
 
 const NameAndTicker = styled.div`
@@ -57,9 +57,9 @@ const NameAndTicker = styled.div`
 	flex-direction: row;
 `;
 
-const SelectText = styled.span<{ mode: boolean }>`
+const SelectText = styled.span<{ $mode: boolean }>`
 	font-size: 14px;
-	color: ${({ mode }) => (mode ? `white` : `rgba(0,0,0,0.6)`)};
+	color: ${({ $mode }) => ($mode ? `white` : `rgba(0,0,0,0.6)`)};
 	font-family: Inter, -apple-system, BlinkMacSystemFont, 'segoe ui', Roboto,
 		Helvetica, Arial, sans-serif;
 	font-weight: 700;

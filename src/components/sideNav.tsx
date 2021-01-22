@@ -20,6 +20,7 @@ import HPink from '../images/logoassets/hpink.png';
 import HPurple from '../images/logoassets/hpurple.png';
 import BraveBanner from '../images/braveBrowser.gif';
 import FormateNumber from '../functions/formatNumber';
+import CountUp from 'react-countup';
 
 // To Be Used in the future
 // import WindowDimensions from './windowDimensions';
@@ -177,11 +178,36 @@ const SideNav = () => {
 		const grandTotal = amountList.reduce(function (a, b) {
 			return a + b;
 		}, 0);
-		const formatedTotal = FormateNumber(grandTotal);
-		return formatedTotal;
+		return grandTotal;
+	}, [findAssettAmount, priceData]);
+
+	const calculateDailyChange = useCallback(() => {
+		const prices = priceData;
+		const amountList = prices.map((coin) => {
+			const amount = findAssettAmount(coin.id)?.amount;
+			const holdingAmount = amount ? amount : 0;
+			if (coin.price_change_24h === null) {
+				return coin.current_price * holdingAmount;
+			}
+			if (coin.price_change_24h < 0) {
+				const negDif = Math.abs(coin.price_change_24h) + coin.current_price;
+				return negDif * holdingAmount;
+			} else {
+				const posDif = coin.current_price - coin.price_change_24h;
+				return posDif * holdingAmount;
+			}
+		});
+		const grandTotal = amountList.reduce(function (a, b) {
+			return a + b;
+		}, 0);
+		return grandTotal;
 	}, [findAssettAmount, priceData]);
 
 	const TotalHoldings = calculateTotalHoldings();
+	const DailyChange = calculateDailyChange();
+	const CalcDownAmount = TotalHoldings - DailyChange;
+	const DownAmount = Math.abs(CalcDownAmount);
+	const UpAmount = TotalHoldings - DailyChange;
 
 	// const toggleDarkMode = () => dispatch(toggle_darkmode());
 
@@ -243,9 +269,56 @@ const SideNav = () => {
 						/>
 					</MenuClick>
 				</HeaderRow>
-				<TotalColumn onClick={() => refreshPage()}>
+				<TotalColumn>
 					<PriceTitle>Total Holdings</PriceTitle>
-					<Price>${TotalHoldings ? TotalHoldings : '0.00'}</Price>
+					<Price>
+						$
+						{TotalHoldings ? (
+							<CountUp
+								start={0.0}
+								end={TotalHoldings}
+								decimals={2}
+								duration={1}
+								separator=","
+							/>
+						) : (
+							'0.00'
+						)}
+					</Price>
+					<DailyDif
+						isUp={TotalHoldings > DailyChange}
+						isNull={DailyChange === undefined || DailyChange === TotalHoldings}
+					>
+						{DailyChange ? (
+							DailyChange === TotalHoldings ? (
+								'$0.00'
+							) : DailyChange > TotalHoldings ? (
+								<>
+									{`-$`}
+									<CountUp
+										start={0.0}
+										end={DownAmount}
+										decimals={2}
+										duration={1}
+										separator=","
+									/>
+								</>
+							) : (
+								<>
+									{`+$`}
+									<CountUp
+										start={0.0}
+										end={UpAmount}
+										decimals={2}
+										duration={1}
+										separator=","
+									/>
+								</>
+							)
+						) : (
+							'$0.00'
+						)}
+					</DailyDif>
 				</TotalColumn>
 				<Refresh onClick={() => refreshPage()}>
 					<FontAwesomeIcon size="1x" color="white" icon={faSyncAlt} />
@@ -361,7 +434,7 @@ const SideNavWrapper = styled.div<{ $mode: boolean; isVisible: boolean }>`
   width: 290px;
   position: fixed;
   left: 5px;
-  top: 110px;
+  top: 120px;
   bottom: 5px;
   overflow: hidden;
   padding-top: 5px;
@@ -370,7 +443,7 @@ const SideNavWrapper = styled.div<{ $mode: boolean; isVisible: boolean }>`
     bottom: 5px;
     width: auto;
 	right: 5px;
-	top: 100px;
+	top: 110px;
     left: ${({ isVisible }) => (isVisible ? '5px' : '1000px')};
     transition-delay: ${({ isVisible }) => (isVisible ? '0s' : '0.4s')};
     transition-duration: ${({ isVisible }) => (isVisible ? '0.6s' : '0.6s')};
@@ -563,12 +636,12 @@ const TotalColumn = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
-	height: 70px;
+	height: 80px;
 	width: 100%;
 	margin-left: 20px;
 	@media only screen and (min-width: 320px) and (max-width: 820px) {
 		align-items: center;
-		height: 60px;
+		height: 70px;
 		margin-left: 0px;
 	}
 `;
@@ -630,4 +703,13 @@ const Refresh = styled.div`
 	@media only screen and (min-width: 320px) and (max-width: 820px) {
 		display: flex;
 	}
+`;
+
+const DailyDif = styled.span<{ isUp: boolean; isNull: boolean }>`
+	font-family: Inter, -apple-system, BlinkMacSystemFont, 'segoe ui', Roboto,
+		Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	font-weight: 800;
+	color: ${({ isUp, isNull }) =>
+		isNull ? 'white' : isUp ? '#16c784' : '#ea3943'};
 `;
